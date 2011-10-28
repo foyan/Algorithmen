@@ -1,0 +1,24 @@
+
+% Florian Lüthi, i10b
+
+sortedInsert(↕list: ListPtr ↓n: ListNodePtr)
+var
+	rover: ListNodePtr
+begin
+	if list→.first = null then
+		prepend(↕list ↓n)
+	else
+		rover := list→.first
+		while rover != null and compare(↓rover→.data ↓n→.data) < 0 do
+			rover := rover→.next
+		end
+		if rover = null then
+			append(↕list ↓n)
+		else
+			n→.next := rover
+			n→.previous := rover→.previous
+			rover→.previous→.next := n
+			rover→.previous := n
+		end
+	end
+end
